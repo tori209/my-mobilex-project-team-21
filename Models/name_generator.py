@@ -2,16 +2,17 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+typeable = "[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|0-9|\s|_\-;\[\]\\\.,\?!@#$%^&*()+{}\[\]\+\=\`\~]"
 
 class InputModel(BaseModel):
     order: str = Field(
         alias='order',
         description='삼행시에 사용될 초성 단어를 입력해주세요!',
         default='명령1 / 명령2 / ...',
-        pattern=r'^[a-z|가-힣|0-9|\s]+(\s*\/\s*[a-z|가-힣|0-9|\s|\.,\-\_\!\@\#\$\%\^\&\*\(\)\[\]\{\}\"\'\:\;\/\\\<\>\+\=]+)*$'
+        pattern=rf'^{typeable}+(\s*\/\s*{typeable}*)*$'
     )
 
-    llm_type: Literal['chatgpt', 'huggingface'] = Field(
+    llm_type: Literal['chatgpt'] = Field(
         alias='Large Language Model Type',
         description='사용할 LLM 종류',
         default='chatgpt',
