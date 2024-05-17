@@ -8,7 +8,7 @@ class InputModel(BaseModel):
         alias='order',
         description='삼행시에 사용될 초성 단어를 입력해주세요!',
         default='명령1 / 명령2 / ...',
-        pattern=r'^[a-z|가-힣|0-9|\s]+(\s*\/\s*[a-z|가-힣|0-9|\s]+)*$'
+        pattern=r'^[a-z|가-힣|0-9|\s]+(\s*\/\s*[a-z|가-힣|0-9|\s|\.,\-\_\!\@\#\$\%\^\&\*\(\)\[\]\{\}\"\'\:\;\/\\\<\>\+\=]+)*$'
     )
 
     llm_type: Literal['chatgpt', 'huggingface'] = Field(
