@@ -1,3 +1,5 @@
+import os
+
 from abc import ABCMeta, abstractmethod
 
 from langchain_community.llms.huggingface_endpoint import HuggingFaceEndpoint

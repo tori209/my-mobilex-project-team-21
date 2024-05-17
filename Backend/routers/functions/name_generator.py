@@ -1,10 +1,11 @@
 import os
+import re
 
 from fastapi import APIRouter
 
 from llm.chat import build
 from llm.store import LLMStore
-from models.acrostic_generator import InputModel, OutputModel
+from models.name_generator import InputModel, OutputModel
 
 # Configure API router
 router = APIRouter(
@@ -30,8 +31,10 @@ async def call_acrostic_generator(model: InputModel) -> OutputModel:
         llm=store.get(model.llm_type),
     )
 
+    order_list = "\n".join([item.strip() for item in model.order.split("/")])
+
     return OutputModel(
         output=chain.invoke({
-            'input_context': model.word,
+            'input_context': order_list,
         }),
     )

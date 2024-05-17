@@ -10,9 +10,9 @@ _MODELS: list[BaseLLMModel] = [
     ChatGPTModel(
         name='chatgpt',
     ),
-    HuggingFaceEndpointModel(
-        name='huggingface',
-    ),
+    #HuggingFaceEndpointModel(
+    #    name='huggingface',
+    #),
 ]
 
 

@@ -4,8 +4,11 @@ from pydantic import BaseModel, Field
 
 
 class InputModel(BaseModel):
-    latest_news: str = Field(
-        default='태풍 노루가 한국에 상륙',
+    order: str = Field(
+        alias='order',
+        description='삼행시에 사용될 초성 단어를 입력해주세요!',
+        default='명령1 / 명령2 / ...',
+        pattern=r'^[a-z|가-힣|0-9|\s]+(\s*\/\s*[a-z|가-힣|0-9|\s]+)*$'
     )
 
     llm_type: Literal['chatgpt', 'huggingface'] = Field(
@@ -14,8 +17,7 @@ class InputModel(BaseModel):
         default='chatgpt',
     )
 
-
 class OutputModel(BaseModel):
     output: str = Field(
-        description='이걸 사라',
+        description='당신에게 다음의 이름을 추천드립니다!',
     )
